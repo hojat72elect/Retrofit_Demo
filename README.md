@@ -85,7 +85,10 @@ implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
 
 ### Annotation processing:
 
-Annotation processing allows you to generate code at compile time based on the annotations in your source code. It's usually used to get rid of repetitive boilerplate code (and Retrofit makes extensive use of annotations for controlling the network connection).<br/><br/>Add this dependency to your Gradle script to use annotation processor for your Retrofit library 👇👇👇
+Annotation processing allows you to generate code at compile time based on the annotations in your source code. It's
+usually used to get rid of repetitive boilerplate code (and Retrofit makes extensive use of annotations for controlling
+the network connection).<br/><br/>Add this dependency to your Gradle script to use annotation processor for your
+Retrofit library 👇👇👇
 
 ```
 // Annotation processor
@@ -102,4 +105,64 @@ plugins {
     id 'kotlin-kapt'
 }
 ```
+
 ----------------------------------
+
+### Logging Interceptor:
+
+We use <a href="https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor">OkHttp-logging-interceptor</a>
+for logging the body of all HTTP requests and responses of our app. In order to add this library to our project, add
+this dependency (the latest stable version might be different from what came here):
+
+```
+implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+```
+
+----------------------------------
+
+### User Permissions:
+
+Since this app will connect to internet, you need to add permissions to AndroidManifest.xml
+
+```
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+```
+
+----------------------------------
+
+### web service provider:
+
+Of course you will be using this template project for accessing to your own web services that you have as the back-end
+of your app; but in this example project, I'm going to connect to the web API proveded
+by <a href="https://jsonplaceholder.typicode.com/">JSONPlaceholder</a>.<br/>
+The JSON file that I will be accessing and parsing in this project is accessible
+in <a href="https://jsonplaceholder.typicode.com/albums">here</a>.
+
+----------------------------------
+
+### Convert JSON to kotlin data class:
+
+The easiest way for converting the JSON data (received through internet communication) into kotlin objects is to
+install "JSON to kotlin class" plugin for Android Studio/IntelliJ IDEA. The icon of this plugin looks like this:
+<br/>
+<img alt="JSON to kotlin class plugin" src="doc_assets/JSON to kotlin plugin.png" width="40" height="40">
+<br/><br/>
+After installing this plugin, you just need to copy your favorite JSON info and in your IDE right click in the package
+and go to "New/kotlin data class from JSON". give a name to yout class and you will have 2 data classes which will
+represent this JSON file in your app project.
+----------------------------------
+
+#### Some additional notes:
+
+* URL management<br/>
+  Please remember that when you're manipulating various endpoints from a single base URL, it's better to treat those
+  URLs like this:
+  <br/><img alt="URL management" src="doc_assets/URL management.png" width="90%" height="90%">
+
+----------------------------------
+
+**That's it! now you have anything you need for going through this project 👏👏 You can read the source code for
+understanding what's going on 🤓<br/>Don't worry! All the code files are heavily documented! You will enjoy reading the
+source code of this project; I promise....😁😁**
