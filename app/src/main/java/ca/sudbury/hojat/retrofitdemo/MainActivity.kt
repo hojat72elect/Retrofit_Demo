@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
@@ -35,10 +36,18 @@ class MainActivity : AppCompatActivity() {
             if (albumsList != null) {
                 while (albumsList.hasNext()) {
                     val albumsItem = albumsList.next()// A single record of the list
-                    Log.i("MYTAG", albumsItem.title)
+                    Log.i("MYTAG", albumsItem.title) // logs the title of all albums.
+                    val result =
+                        " Album Title : ${albumsItem.title}\n Album ID : ${albumsItem.id}\n User ID : ${albumsItem.userId}\n\n\n"
+                    text_View.append(result)
+                    /*
+                     * So, this is how you can access JSON data from a RESTFul API via Retrofit library.
+                     */
                 }
             }
         })
+
+        /**/
 
     }
 }
