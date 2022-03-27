@@ -161,6 +161,12 @@ represent this JSON file in your app project.
   URLs like this:
   <br/><img alt="URL management" src="doc_assets/URL management.png" width="90%" height="90%">
 
+* Retrofit library was created on top of okHTTP library and uses its classes to perform network operations.
+HTTP logging interceptor is a feature which belongs to okHTTP library which logs all the network operations happened  in our app. This is extremely useful for debugging purposes. 
+
+* Configure Timeouts:
+Imagine an example android app of a product delivery company. Sales reps would use it to get orders from different shop owners of all areas in a country. 
+
 ----------------------------------
 
 **That's it! now you have anything you need for going through this project 👏👏 You can read the source code for

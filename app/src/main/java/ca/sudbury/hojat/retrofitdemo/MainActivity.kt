@@ -2,6 +2,7 @@ package ca.sudbury.hojat.retrofitdemo
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -10,22 +11,31 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+    // "retService" is an object which complies with AlbumsService interface.
+    private lateinit var retService: AlbumsService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // "retService" is a nullable object which complies with AlbumsService interface.
-        val retService = RetrofitInstance
+        retService = RetrofitInstance
             .getRetrofitInstance()
             .create(AlbumsService::class.java)
+        getRequestWithQueryParameters()
+        getRequestWithPathParameters()
+
+    }
+
+    private fun getRequestWithQueryParameters() {
+
         /*
-        * Using a coroutine livedata builder, we can get the
-        * retrofit response object as a livedata (LiveData is a
-        * data holder class).
-        * in this line, we create a LiveData object with the help of kotlin coroutines.
-        * */
+       * Using a coroutine livedata builder, we can get the
+       * retrofit response object as a livedata (LiveData is a
+       * data holder class).
+       * in this line, we create a LiveData object with the help of kotlin coroutines.
+       * */
         val responseLiveData: LiveData<Response<Albums>> = liveData {
-            val response = retService.getAlbums()
+            val response = retService.getSortedAlbums(3) // the query is userId=3
             emit(response) // The Response<Albums> will be added into LiveData object.
         }
 
@@ -46,8 +56,24 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
 
-        /**/
+    private fun getRequestWithPathParameters() {
+        // example of path parameter in retrofit:
+        val pathResponse: LiveData<Response<AlbumsItem>> = liveData {
+            val response = retService.getAlbum(56)
+            emit(response)
+        }
+
+        // Now we're observing the LiveData above:
+        // So in this example, the title of the response that we'll receive by
+        // providing albumId=3 (in fact it means "id" is 3) as the path parameter
+        // to API will be shown as a Toast message.
+        pathResponse.observe(this, Observer {
+            val title = it.body()?.title
+            Toast.makeText(applicationContext, "The title of the album: $title", Toast.LENGTH_LONG).show()
+        })
 
     }
 }
+
