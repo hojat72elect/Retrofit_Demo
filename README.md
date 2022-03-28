@@ -161,13 +161,27 @@ represent this JSON file in your app project.
   URLs like this:
   <br/><img alt="URL management" src="doc_assets/URL management.png" width="90%" height="90%">
 
-* Retrofit library was created on top of okHTTP library and uses its classes to perform network operations.
-HTTP logging interceptor is a feature which belongs to okHTTP library which logs all the network operations happened  in our app. This is extremely useful for debugging purposes. 
+* Retrofit library was created on top of okHTTP library and uses its classes to perform network operations. HTTP logging
+  interceptor is a feature which belongs to okHTTP library which logs all the network operations happened in our app.
+  This is extremely useful for debugging purposes.
 
 * Configure Timeouts:
-Imagine an example android app of a product delivery company. Sales reps would use it to get orders from different shop owners of all areas in a country. This app is supposed to communicate with a REST API that provides real time updates; so the app has to frequently download data and display it using a RecyclerView. You might test the app inside the company with high-speed internet there; but when users in all over the country (or world) use it, they probably don't have high-quality network connection. 
+  Imagine an example android app of a product delivery company. Sales reps would use it to get orders from different
+  shop owners of all areas in a country. This app is supposed to communicate with a REST API that provides real time
+  updates; so the app has to frequently download data and display it using a RecyclerView. You might test the app inside
+  the company with high-speed internet there; but when users in all over the country (or world) use it, they probably
+  don't have high-quality network connection.
 
-In such situations that a bad quality of internet connection might cause the app not downloading all of its needed data, you might be able to partially solve the issue by increasing the "connection timeout" and "read timeout" of the Retrofit instance.
+In such situations that a bad quality of internet connection might cause the app not downloading all of its needed data,
+you might be able to partially solve the issue by increasing the "connection timeout" and "read timeout" of the Retrofit
+instance.
+
+* GET and POST:
+
+GET and POST are the most common HTTP methods used in a client app.<br/><br/>
+**GET** requests are to request some data from server; we never use GET request to create, delete, or update data (only for reading).<br/>The data received by GET request can be cached if the client requests them to remain in the browser history. But never do that with sensitive data because it will be a breach of user's privacy.
+
+**POST** requests are used to send data to the server and create new records in server's database. 
 
 ----------------------------------
 

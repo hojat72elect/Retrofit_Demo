@@ -21,8 +21,9 @@ class MainActivity : AppCompatActivity() {
         retService = RetrofitInstance
             .getRetrofitInstance()
             .create(AlbumsService::class.java)
-        getRequestWithQueryParameters()
-        getRequestWithPathParameters()
+//        getRequestWithQueryParameters() // call it for GET with query parameter.
+//        getRequestWithPathParameters() // call it for GET with path parameter.
+        uploadAlbum() // call it for POST request to the server
 
     }
 
@@ -74,6 +75,22 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "The title of the album: $title", Toast.LENGTH_LONG).show()
         })
 
+    }
+
+    private fun uploadAlbum() {
+        val album = AlbumsItem(0, "Hojat title", 3)
+        val postResponse: LiveData<Response<AlbumsItem>> = liveData {
+            val response = retService.uploadAlbum(album)
+            emit(response)
+        }
+
+        // Observe the response
+        postResponse.observe(this, Observer {
+            val receivedAlbumsItem = it.body()
+            val result =
+                " Album Title : ${receivedAlbumsItem?.title}\n Album ID : ${receivedAlbumsItem?.id}\n User ID : ${receivedAlbumsItem?.userId}\n\n\n"
+            text_View.text = result // uploads the text view in main page with the result of this POST request.
+        })
     }
 }
 

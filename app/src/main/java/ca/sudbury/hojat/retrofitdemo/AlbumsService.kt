@@ -1,9 +1,7 @@
 package ca.sudbury.hojat.retrofitdemo
 
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * @author Hojat Ghasemi,
@@ -47,5 +45,11 @@ interface AlbumsService {
     @GET("/albums/{id}")
     suspend fun getAlbum(@Path(value = "id") albumId: Int): Response<AlbumsItem>
 
+    /**
+     * This function is defining a POST request to the server (the function is annotated with "POST" and API's endpoint for updating albums).
+     * The input "AlbumsItem" object will be sent as the body of a POST request.
+     */
+    @POST("/albums")
+    suspend fun uploadAlbum(@Body album: AlbumsItem): Response<AlbumsItem>
 
 }
