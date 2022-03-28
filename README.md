@@ -165,7 +165,9 @@ represent this JSON file in your app project.
 HTTP logging interceptor is a feature which belongs to okHTTP library which logs all the network operations happened  in our app. This is extremely useful for debugging purposes. 
 
 * Configure Timeouts:
-Imagine an example android app of a product delivery company. Sales reps would use it to get orders from different shop owners of all areas in a country. 
+Imagine an example android app of a product delivery company. Sales reps would use it to get orders from different shop owners of all areas in a country. This app is supposed to communicate with a REST API that provides real time updates; so the app has to frequently download data and display it using a RecyclerView. You might test the app inside the company with high-speed internet there; but when users in all over the country (or world) use it, they probably don't have high-quality network connection. 
+
+In such situations that a bad quality of internet connection might cause the app not downloading all of its needed data, you might be able to partially solve the issue by increasing the "connection timeout" and "read timeout" of the Retrofit instance.
 
 ----------------------------------
 

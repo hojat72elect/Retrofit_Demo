@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * @author Hojat Ghasemi,
@@ -35,6 +36,17 @@ class RetrofitInstance {
 
         val client = OkHttpClient.Builder().apply {
             this.addInterceptor(interceptor) // adding a logging interceptor to the builder class for our OkHttpClient.
+                // the time that app has to establish a connection with the server (default is 10 seconds).
+                .connectTimeout(30, TimeUnit.SECONDS)
+                // maximum time gap between arrivals of 2 data packets that we wait
+                .readTimeout(20, TimeUnit.SECONDS)
+                // maximum time gap between 2 data packets we're sending to the server
+                .writeTimeout(25, TimeUnit.SECONDS)
+            /*
+            * In real life examples you need to decide the amount of the timeouts according to
+            * factors such as "Internet speed", "performance of the server" and "performance of
+            * the device".
+            */
         }.build()
 
         /**
