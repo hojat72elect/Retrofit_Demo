@@ -1,6 +1,16 @@
 ## Retrofit Demo
 
-This Repository is my template for implementing RESTFul APIs interaction in the android app. There are 3 steps you need
+This Repository is my template for implementing RESTFul APIs interaction in the android app. This project also covers these topics:
+
+* Retrofit
+* GSON
+* Kotlin Coroutines
+* LiveData
+* OkHttp3 logging interceptor
+
+----------------------------------
+
+There are 3 steps you need
 to go through in order to add Retrofit to your project:
 <br/><img alt="Retrofit integration steps" src="doc_assets/3 steps of using Retrofit in android project.png" width="60%" height="60%"><br/>
 
@@ -148,10 +158,11 @@ The easiest way for converting the JSON data (received through internet communic
 install "JSON to kotlin class" plugin for Android Studio/IntelliJ IDEA. The icon of this plugin looks like this:
 <br/>
 <img alt="JSON to kotlin class plugin" src="doc_assets/JSON to kotlin plugin.png" width="40" height="40">
-<br/><br/>
+<br/>
 After installing this plugin, you just need to copy your favorite JSON info and in your IDE right click in the package
-and go to "New/kotlin data class from JSON". give a name to yout class and you will have 2 data classes which will
+and go to "New/kotlin data class from JSON". give a name to your class and you will have 2 data classes which will
 represent this JSON file in your app project.
+
 ----------------------------------
 
 #### Some additional notes:
